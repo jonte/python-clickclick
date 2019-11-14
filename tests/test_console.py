@@ -5,11 +5,11 @@ import time
 
 import click
 from click.testing import CliRunner
+
+import pytest
 from clickclick import (Action, AliasedGroup, FloatRange, OutputFormat,
                         UrlType, action, choice, error, fatal_error,
                         format_time, info, ok, print_table, warning)
-
-import pytest
 
 
 def test_echo():

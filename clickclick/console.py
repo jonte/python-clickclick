@@ -140,7 +140,7 @@ def format_time(ts):
     now = get_now()
     try:
         dt = datetime.datetime.fromtimestamp(ts)
-    except:
+    except (TypeError, OSError, OverflowError):
         return ts
     diff = now - dt
     s = diff.total_seconds()
@@ -229,8 +229,7 @@ def print_table(cols, rows, styles=None, titles=None, max_column_widths=None):
             align = ''
             try:
                 style = styles.get(val, {})
-            except:
-                # val might not be hashable
+            except TypeError:  # val not be hashable
                 style = {}
             if val is not None and col.endswith('_time') and isinstance(val, numbers.Number):
                 align = '>'
@@ -278,7 +277,7 @@ def choice(prompt, options, default=None):
             else:
                 value = result
             return value
-        except:
+        except (IndexError, ValueError, TypeError):
             pass
 
 
